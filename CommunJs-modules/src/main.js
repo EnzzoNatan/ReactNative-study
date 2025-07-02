@@ -1,5 +1,6 @@
 const p = require("./services/products")
 const config = require("./services/config")
+const database = require("./services/dataBase")
 
 async function main(){
     console.log("Hello world")
@@ -12,6 +13,9 @@ async function main(){
 
     console.log(config.production)
     p.productType.version
+
+    database.connecToDatabase("MongoDB")
+    database.disconnectDatabase()
 
 
 }
