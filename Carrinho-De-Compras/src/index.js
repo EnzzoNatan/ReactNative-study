@@ -19,7 +19,11 @@ await servicoCarrinho.addItem(carrinho, item2)
 await servicoCarrinho.addItem(carrinho, item3)
 
 
+
+await servicoCarrinho.removeItem(carrinho, item3)
 await servicoCarrinho.removeItem(carrinho, item1)
+
+
 
 
 

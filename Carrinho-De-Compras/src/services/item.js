@@ -7,7 +7,7 @@ async function criarItem(nome,preco,quantidade){
         nome,
         preco,
         quantidade,
-        subtotal:() => preco * quantidade,
+        subtotal:() => preco * quantidade
     }
 }
 

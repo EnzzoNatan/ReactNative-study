@@ -3,7 +3,18 @@
 //CASOS DE USO
 // adicionar item no carrinho✅
 async function addItem(usuarioCarrinho, item){
-    usuarioCarrinho.push(item)
+    const index = usuarioCarrinho.findIndex((p) => p.nome === item.nome)
+    if(index !== -1){
+        usuarioCarrinho[index].quantidade += item.quantidade
+    } else {
+        // Cria uma cópia do item e garante que subtotal sempre reflita a quantidade atual
+        usuarioCarrinho.push({
+            ...item,
+            subtotal() {
+                return this.preco * this.quantidade;
+            }
+        });
+    }
 }
 
 //calcular o valor total✅
@@ -27,25 +38,25 @@ async function deleteItem(usuarioCarrinho, nome){
 async function verCarrinho(usuarioCarrinho){
     console.log("LISTA DE COMPRAS: ")
     usuarioCarrinho.forEach((item, index) => {
-        console.log(`${index + 1}. ${item.nome} - R$ ${item.preco} x ${item.quantidade} = R$ ${item.subtotal()}`)
+        console.log(`${index + 1}. ${item.nome} - Preço: R$ ${item.preco} | Quantidade: ${item.quantidade} | Subtotal: R$ ${item.subtotal()}`)
     })
 }
 
-//remover item do carrinho
+//remover item do carrinho✅
 async function removeItem(usuarioCarrinho, item){   
     const indexId = usuarioCarrinho.findIndex((p) => p.nome === item.nome)
-    
-    if(indexId == -1){
+    if(indexId === -1){
         console.log("ITEM NÃO ENCONTRADO")
         return
     }
 
     if (usuarioCarrinho[indexId].quantidade > 1) {
-        usuarioCarrinho[indexId].quantidade -=1
+        usuarioCarrinho[indexId].quantidade -= 1
         return
-    } 
+    }
 
-    if(usuarioCarrinho[indexId].quantidade == -1){
+    // Se a quantidade for 1, ao remover, deve excluir o item do carrinho
+    if(usuarioCarrinho[indexId].quantidade === 1){
         usuarioCarrinho.splice(indexId, 1)
         return
     }
