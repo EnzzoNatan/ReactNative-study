@@ -10,13 +10,20 @@ console.log("Bem-vindo ao carrinho de compras!");
 console.log("\n")
 
 const item1 = await criarItem("Peça de moto", 50.00, 3)
-const item2 = await criarItem("Peça do carro", 80.00, 2)
-const item3 = await criarItem("Motor", 1800.00, 5)
+const item2 = await criarItem("Luvas de sky", 80.00, 1)
+const item3 = await criarItem("Jaqueta TheNorthFace", 800.00, 2)
 
 //ADICIONANDO ITEM AO CARRINHO
 await servicoCarrinho.addItem(carrinho, item1)
 await servicoCarrinho.addItem(carrinho, item2)
 await servicoCarrinho.addItem(carrinho, item3)
+
+
+await servicoCarrinho.removeItem(carrinho, item1)
+
+
+
+//VISUALIZANDO ITENS DO CARRINHO
 await servicoCarrinho.verCarrinho(carrinho)
 
 

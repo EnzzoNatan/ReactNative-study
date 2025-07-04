@@ -23,6 +23,7 @@ async function deleteItem(usuarioCarrinho, nome){
 
 }
 
+//Visualizar itens do carrinho✅
 async function verCarrinho(usuarioCarrinho){
     console.log("LISTA DE COMPRAS: ")
     usuarioCarrinho.forEach((item, index) => {
@@ -31,8 +32,23 @@ async function verCarrinho(usuarioCarrinho){
 }
 
 //remover item do carrinho
-async function removeItem(usuarioCarrinho, index){
+async function removeItem(usuarioCarrinho, item){   
+    const indexId = usuarioCarrinho.findIndex((p) => p.nome === item.nome)
     
+    if(indexId == -1){
+        console.log("ITEM NÃO ENCONTRADO")
+        return
+    }
+
+    if (usuarioCarrinho[indexId].quantidade > 1) {
+        usuarioCarrinho[indexId].quantidade -=1
+        return
+    } 
+
+    if(usuarioCarrinho[indexId].quantidade == -1){
+        usuarioCarrinho.splice(indexId, 1)
+        return
+    }
 }
 
 
